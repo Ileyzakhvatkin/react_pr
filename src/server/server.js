@@ -14,6 +14,14 @@ app.get('/', (req, res) => {
   }
 });
 
+app.get('*', (req, res) => {
+  try {
+    res.send(indexTemplate(ReactDOM.renderToString(App())));
+  } catch (error) {
+    return res.status(error.status || 500);
+  }
+});
+
 app.listen(3000, () => {
   console.log("server started on port http://mysite:3000");
 });
